@@ -21,7 +21,7 @@ bool InitSDL() {
     }
     else {
         //creates window if setup is passed
-        g_window = SDL_CreateWindow("Games Engine Creation",
+        g_window = SDL_CreateWindow("Budget Mario",
             SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED,
             SCREEN_WIDTH,
@@ -46,10 +46,29 @@ void CloseSDL() {
 int main()
 {
     if (InitSDL()) {
-        SDL_Delay(5000);
+        bool quit = false;
+
+        while (!quit)
+        {
+            quit = Update();
+        }
     }
 
     CloseSDL();
+}
 
-    return 0;
+int Update() 
+{
+    SDL_Event e;
+    SDL_PollEvent(&e);
+
+    switch (e.type)
+    {
+        //click the "X" to quit
+    case SDL_QUIT:
+        return true;
+        break;
+    }
+
+    return false;
 }
